@@ -4,7 +4,7 @@ import pandas as pd
 
 
 st.write("""
-# Bobify 
+# TeaTally 
 ### Share Your Boba Status w/ Friends
 """)
 
