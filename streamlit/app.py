@@ -9,33 +9,94 @@ st.write("""
 """)
 
 
-# Option selection for the user
-option = st.selectbox(
-    'Create a new friend group or join an existing one?',
-    ['Choose an option', 'Create a new group', 'Join an existing group']
-)
+# Function to display the initial dropdown menu
+def show_group_selection():
+    # Placeholder for the group selection dropdown
+    option = st.selectbox('Create a new friend group or join an existing one?',
+    ['Choose an option', 'Create a new group', 'Join an existing group'])
 
-# Initialize an empty string for the group name
-group_name = ''
+    # Initialize an empty string for the group name
+    group_name = ''
+        
+    if option == 'Create a new group':
+        # Text input for entering a new group name
+        group_name = st.text_input('Enter a name for your new group:')
+        # Update the session state to indicate a group has been selected
+        st.session_state.option = group_name  # Save the selected group ID in session state
+        if st.button('Create Group'):
+            # Here, you would include the logic to create a new group
+            # For now, it's just a placeholder print statement
+            st.success(f'Group "{group_name}" created successfully!')
+            # Add logic to add the group to your database
 
-# Conditional logic based on the user's choice
-if option == 'Create a new group':
-    # Text input for entering a new group name
-    group_name = st.text_input('Enter a name for your new group:')
-    if st.button('Create Group'):
-        # Here, you would include the logic to create a new group
-        # For now, it's just a placeholder print statement
-        st.success(f'Group "{group_name}" created successfully!')
-        # Add logic to add the group to your database
+        
+    elif option == 'Join an existing group':
+        # Text input for entering the name of an existing group to join
+        group_name = st.text_input('Enter the name of the group you want to join:')
+        # Update the session state to indicate a group has been selected
+        st.session_state.option = group_name  # Save the selected group ID in session state
+        if st.button('Join Group'):
+            # Here, you would include the logic to check if the group exists and join it
+            # For now, it's just a placeholder print statement
+            st.success(f'Joined group "{group_name}" successfully!')
+            # Add logic to verify and add the user to the group in your database
+        
+        
+    # If a group ID is selected (and it's not the placeholder choice)
+    if option and option != 'Choose an option':
+        # Update the session state to indicate a group has been selected
+        st.session_state.group_selected = True
 
-elif option == 'Join an existing group':
-    # Text input for entering the name of an existing group to join
-    group_name = st.text_input('Enter the name of the group you want to join:')
-    if st.button('Join Group'):
-        # Here, you would include the logic to check if the group exists and join it
-        # For now, it's just a placeholder print statement
-        st.success(f'Joined group "{group_name}" successfully!')
-        # Add logic to verify and add the user to the group in your database
+# Function to display content after a group is selected
+def show_group_content():
+    # Assuming 'group_id' is stored in session_state when a group is selected
+    option = st.session_state.get('option', '')
+    
+    # Display a message with the selected group ID
+    st.write(f"You're viewing content for group: {option}")
+    
+    # Here, you can add more content or functionality specific to the group
+    # For example, display group-specific data, forms, charts, etc.
+    st.write("Here's some content for your group...")
+    
+    
+# Check if a group has already been selected
+if not st.session_state.get('group_selected', False):
+    # If no group has been selected, show the group selection dropdown
+    show_group_selection()
+else:
+    # If a group has been selected, show the group-specific content
+    show_group_content()
+    
+    
+    
+# # Option selection for the user
+# option = st.selectbox(
+#     'Create a new friend group or join an existing one?',
+#     ['Choose an option', 'Create a new group', 'Join an existing group']
+# )    
+
+# # Initialize an empty string for the group name
+# group_name = ''
+
+# # Conditional logic based on the user's choice
+# if option == 'Create a new group':
+#     # Text input for entering a new group name
+#     group_name = st.text_input('Enter a name for your new group:')
+#     if st.button('Create Group'):
+#         # Here, you would include the logic to create a new group
+#         # For now, it's just a placeholder print statement
+#         st.success(f'Group "{group_name}" created successfully!')
+#         # Add logic to add the group to your database
+
+# elif option == 'Join an existing group':
+#     # Text input for entering the name of an existing group to join
+#     group_name = st.text_input('Enter the name of the group you want to join:')
+#     if st.button('Join Group'):
+#         # Here, you would include the logic to check if the group exists and join it
+#         # For now, it's just a placeholder print statement
+#         st.success(f'Joined group "{group_name}" successfully!')
+#         # Add logic to verify and add the user to the group in your database
 
 
 
