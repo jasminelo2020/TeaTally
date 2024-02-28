@@ -30,10 +30,10 @@ with st.form('boba_tracker', clear_on_submit=True):
         st.write('new boba recorded!')
 
 st.write("""
-## current 2024 boba consumption
+## current 2024 drink consumption
 """)
 
-df = pd.read_csv('data/boba.csv')
+df = pd.read_csv('data/drinks.csv')
 
 # st.write(df)
 st.dataframe(df)
