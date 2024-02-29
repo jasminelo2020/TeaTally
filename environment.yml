@@ -1,7 +1,0 @@
-name: teatally
-channels:
-  - defaults
-  - conda-forge
-dependencies:
-  - pip:
-      - firebase-admin==6.4.0
